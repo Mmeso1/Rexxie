@@ -1,6 +1,3 @@
-# Docker
-.dockerignore
-
 # Logs
 *.log
 logs/

@@ -21,4 +21,3 @@ VOLUME ["/var/lib/kafka/data", "/var/log/kafka"]
 
 # The base image already contains the startup script
 # Default command will be inherited from base image or can be overridden via docker-compose
-
