@@ -19,25 +19,25 @@ docker-compose up -d
 
 This will start:
 - **Zookeeper** on port 2181
-- **Kafka Broker** on ports 9092 (external) and 9093 (internal)
+- **Kafka Broker** (using Confluent Platform) on ports 9092 (external) and 9093 (internal)
 - **Kafka UI** on port 8080 (accessible at http://localhost:8080)
 
-### Using Dockerfile Only
+### Using Custom Dockerfile
 
-Build the Kafka image:
+The included Dockerfile extends the official Confluent Kafka image with additional customizations. To use it:
 
-```bash
-docker build -t rexxie-kafka .
+1. Update docker-compose.yml to use the custom build:
+```yaml
+  kafka:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # ... rest of configuration
 ```
 
-Run Kafka (requires a running Zookeeper instance):
-
+2. Build and start:
 ```bash
-docker run -d --name kafka \
-  -p 9092:9092 \
-  -e KAFKA_ZOOKEEPER_CONNECT=<zookeeper-host>:2181 \
-  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 \
-  rexxie-kafka
+docker-compose up -d --build
 ```
 
 ## Kafka Configuration
@@ -164,7 +164,12 @@ docker exec -it rexxie-kafka kafka-broker-api-versions.sh --bootstrap-server loc
 
 ## Version Information
 
-- Apache Kafka: 3.6.1
-- Scala: 2.13
-- Java: OpenJDK 11
+- Apache Kafka: 3.6.1 (via Confluent Platform 7.5.3)
 - Zookeeper: Confluent Platform 7.5.3
+- Kafka UI: Latest
+
+## Notes
+
+- The Dockerfile extends the official Confluent Kafka image and can be customized for specific needs
+- By default, docker-compose.yml uses the official Confluent images directly for faster startup
+- To use custom configurations, uncomment the build section in docker-compose.yml

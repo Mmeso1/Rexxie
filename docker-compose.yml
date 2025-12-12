@@ -14,9 +14,7 @@ services:
       - kafka-network
 
   kafka:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: confluentinc/cp-kafka:7.5.3
     container_name: rexxie-kafka
     depends_on:
       - zookeeper
@@ -39,7 +37,7 @@ services:
     networks:
       - kafka-network
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions.sh", "--bootstrap-server", "localhost:9092"]
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
       interval: 30s
       timeout: 10s
       retries: 5
