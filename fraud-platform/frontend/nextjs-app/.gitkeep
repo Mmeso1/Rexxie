@@ -1,0 +1,24 @@
+# Next.js Application
+
+This directory will contain the Next.js frontend application for the fraud detection platform.
+
+## Setup
+
+```bash
+npx create-next-app@latest .
+npm install
+npm run dev
+```
+
+## Features
+
+- Real-time transaction monitoring dashboard
+- Fraud detection alerts
+- Transaction history and analytics
+- User-friendly interface
+
+## Configuration
+
+The app will connect to:
+- FastAPI Backend: http://localhost:8000
+- AI Service: http://localhost:8001
