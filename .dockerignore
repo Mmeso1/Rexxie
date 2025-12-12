@@ -1,0 +1,5 @@
+*.log
+.git
+.gitignore
+README.md
+KAFKA_SETUP.md
